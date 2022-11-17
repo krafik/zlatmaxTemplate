@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+@@include('html/_head.htm',{
+"title":"Главная"
+})
+
+<body>
+	<div class="wrapper">
+
+		<main class="page">
+
+			<div class="test__container">
+				<!-- <h2 class="test__cont-text"> av(fz,16,12); min-width 101.25em{sfz:1rem}</h2> -->
+				<div class="test__cont-text">
+					<p>test text</p>
+					<p>av(fz,16,12); -------------------wFrom = containerW, wTo = wMin(320), kS=0</p>
+					<br>
+					<p>(min-width 101.25em/1620px) {fz:1rem}</p>
+					<p>(min-width: 20em/320px) and (max-width: 101.25em/1620px) {fz: calc(0.75rem/12 ....)</p>
+					<p>(max-width: 20em/320px) {fz: 0.75rem/12px}</p>
+				</div>
+				<br><br><br>
+				<div class="test__cont-text">
+					<p>test text 2</p>
+					<p>av(fz,16,12,0); -------------------wFrom = 0. в первое условиене входит. </p>
+					<br>
+					<p>{fz: calc(0.75rem * 0.25 ....)}</p>
+			
+				</div>
+				<br><br><br>
+				<div class="test__cont-text">
+					<p>test text 3</p>
+					<p>av(fz,16,12,1620,320); -------------------wFrom = 1620, wTo = 320, kS = 0</p>
+					<br>
+					<p>Повторяет 1й случай.</p>
+				</div>
+				<br><br><br>
+				<div class="test__cont-text">
+					<p>test text 4</p>
+					<p>av(fz,16,12,1620,320,1); -------------------wFrom = 1620, wTo = 320, kS = 1</p>
+					<br>
+					<p>Повторяет 1й случай.</p>
+				</div>
+				<br><br><br>
+				<div class="test__cont-text">
+					<p>test text 5</p>
+					<p>av(fz,16,12,1620,320,2); -------------------wFrom = 1620, wTo = 320, kS = 2</p>
+					<br>
+					<p>Повторяет 1й случай. т.к срабатывает условие дефолтные значения wFrom и wTo равняются заданным. </p>
+				</div>
+				<br><br><br>
+				<div class="test__cont-text">
+					<p>test text 6</p>
+					<p>av(fz,16,12,1440,320); -------------------wFrom = 1440, wTo = 320, kS = 0</p>
+					<br>
+					<p>(min-width: 20em/320px) and (max-width: 101.25em/1620px) {fz: calc(0.75rem/12 ....)</p>
+						<p>(max-width: 20em/320px) {fz: 0.75rem/12px}</p>
+				</div>
+				<br><br><br>
+				<div class="test__cont-text">
+					<p>test text 7 --- test text 8</p>
+					<p>av(fz,16,12,1440,320,1); -------------------wFrom = 1440, wTo = 320, kS = 1</p>
+					<p>av(fz,16,12,1440,320,2); -------------------wFrom = 1440, wTo = 320, kS = 2</p>
+					<br>
+					<p>результат в обоих тестах одинаковій. срабатывает на 1м условии по ширине контейнера из-за ks=1 ks=2</p>
+					<p>(min-width 90em/1440px) {fz:1rem}</p>
+					<p>(min-width: 20em/320px) and (max-width: 90em/1440px) {fz: calc(0.75rem/12 ....)</p>
+					<p>(max-width: 20em/320px) {fz: 0.75rem/12px}</p>
+				</div>
+				<br><br><br>
+				<div class="test__cont-text">
+					<p>test text 9</p>
+					<p>av(fz,16,12,1440,320,3); -------------------wFrom = 1440, wTo = 320, kS = 3</p>
+					<br>
+					<p>(min-width: 20em/320px) and (max-width: 90em/1440px) {fz: calc(0.75rem/12 ....)</p>
+					<p>(max-width: 20em/320px) {fz: 0.75rem/12px}</p>
+				</div>
+				<br><br><br>
+				<div class="test__cont-text">
+					<p>test text 10</p>
+					<p>av(fz,16,12,1440,768); -------------------wFrom = 1440, wTo = 768, kS = 0</p>
+					<br>
+					<p>(min-width: 48em/768px) and (max-width: 90em/1440px) {fz: calc(0.75rem/12 ....)</p>
+				</div>
+				<br><br><br>
+				<div class="test__cont-text">
+					<p>test text 11</p>
+					<p>av(fz,16,12,1440,768,1); -------------------wFrom = 1440, wTo = 768, kS = 1</p>
+					<br>
+					<p>(min-width 90em/1440px) {fz:1rem}</p>
+					<p>(min-width: 48em/768px) and (max-width: 90еm/1440px) {fz: calc(0.75rem/12 ....)</p>
+					<p>(max-width: 48em/768px) {fz: 0.75rem/12px}</p>
+				</div>
+			</div>
+			<div class="test__w_cont">
+				<h2 class="test__w-cont-text">test text</h2>
+			</div>
+		</main>
+
+	</div>
+
+	@@include('html/_js.htm',{})
+</body>
+
+</html>
