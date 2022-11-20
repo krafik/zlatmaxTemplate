@@ -25,6 +25,9 @@
 		align-items: center;
 		gap: rem(20);
 		min-height: rem(50);
+		@media (max-width:$tablet){
+			gap: rem(30);
+		}
 	}
 
 	// .top-header__menu
@@ -34,20 +37,28 @@
 
 	// .top-header__user
 	&__user {
+		position: relative;
+	z-index: 5;
 		display: inline-flex;
 		align-items: center;
 		font-weight: 600;
 		line-height: math.div(22, 18);
-
+		gap: em(15, 18);
 		&::before {
 			font-size: rem(28);
-			margin-right: em(15, 28);
+			
 		}
 		@media (any-hover: hover){
 			&:hover{
 				span{
 					text-decoration: underline;
 				}
+			}
+		}
+		@media (max-width:$tablet){
+			&::before {font-size: rem(35);}
+			span{
+				display: none;
 			}
 		}
 	}
@@ -60,7 +71,7 @@
 		@include adaptiveValue("column-gap", 60, 20);
 		@media (max-width:$tablet){
 			flex-direction: column;
-			row-gap: 15px;
+			row-gap: 25px;
 		}
 	}
 
@@ -84,6 +95,7 @@
 		}
 		&_catalog{
 			display: flex;
+			align-items: center;
 			flex-direction: row-reverse;
 			justify-content: space-between;
 			&::before{
@@ -93,12 +105,12 @@
 				justify-content: center;
 				align-items: center;
 				font-size: rem(8);
-				transform: rotate(-90deg);
+				transform: translateY(rem(-2)) rotate(-90deg);
 				
 			}
 		}
 		@media (max-width:$tablet){
-			@include adaptiveValue("font-size", 30, 18, 992,320,1);
+			@include adaptiveValue("font-size", 30, 20, 992,320,1);
 		}
 	}
 	@media (max-width:$tablet){
@@ -119,8 +131,25 @@
 			  top: 0;
 			  overflow: auto;
 			  background: $mainDarkColor;
-			  padding: rem(80) rem(15) rem(50) rem(15);
+			  padding: rem(100) rem(15) rem(50) rem(15);
 			  z-index: 4;
+			  transition: left 0.3s ease 0s;
+			  &::before{
+				content:'';
+				position: fixed;
+				width: 100%;
+				height: 70px;
+				top: 0;
+				left: -100%;
+				background-color: $mainDarkColor;
+				// transition: left 0.3s ease 0s;
+			  }
+			  .menu-open &{
+				left: 0;
+				&::before{
+					left: 0;
+				}
+			  }
 		}
 	}
 	@media (max-width: $tablet) {
@@ -143,6 +172,12 @@
 		display: flex;
 		min-height: rem(70);
 		align-items: center;
+		@media (max-width:$tablet){
+			justify-content: space-between;
+		}
+		@media (max-width:$mobileSmall){
+			 justify-content: center; 
+		}
 	}
 
 	// .body-header__logo
@@ -155,22 +190,31 @@
 
 	// .body-header__search
 	&__search {
-		flex: 1 1 auto;
-		padding-right: rem(20);
-		@include adaptiveValue("padding-left", 158, 20, 1620, 1200,1);
+		flex: 1 1 auto; 
+		
+		
+		@media (min-width:$tablet){
+			padding-right: rem(20);
+		}
+		@media (min-width:$mobileSmall){
+			@include adaptiveValue("padding-left", 158, 20, 1620, 1200,1);
+		}
 	} 
 	// .body-header__actions
 	&__actions {
+		
 	}
 }
 
 .search-header {
-	max-width: rem(377);
+
 	background-color: rgba(7, 7, 7, 0.03);
 	border-radius: rem(3);
 	position: relative;
 	border: 1px solid rgba(4, 4, 4, 0.5);
-
+	@media (min-width:$tablet){
+		max-width: rem(377); 
+	}
 	// .search-header__button
 	&__button {
 		position: absolute;
@@ -198,6 +242,9 @@
 		}
 
 	}
+	@media (max-width:$mobileSmall){
+		 background-color: #fff; 
+	}
 }
 //========================================================================================================================================================
 
@@ -206,6 +253,9 @@
 	align-items: center;
 	// column-gap: rem(30);
 	@include adaptiveValue("gap", 30,20,1620, 1000,1);
+	@media (max-width:$tablet){
+		display: none;
+	}
 	// .actions-header__location
 	&__location {
 		display: inline-flex;
@@ -225,15 +275,15 @@
 				
 			}
 		}
-		@media (max-width:$tablet){
-			display: none;
-		}
+		
 	}
 	// .actions-header__phones
 	&__phones {
 	}
 	// .actions-header__favorite
 	&__favorite {
+		position: relative;
+	z-index: 5;
 		font-size: rem(27);
 	}
 	// .actions-header__cart
@@ -243,6 +293,8 @@
 }
 
 .phones-header {
+	position: relative;
+	z-index: 5;
 	// .phones-header__items
 	&__items {
 	}
@@ -256,6 +308,24 @@
 		white-space: nowrap;
 		font-weight: 600;
 		line-height: math.div(22, 18);
+		&::before{
+			display: none;
+			@extend %ic;
+			@extend ._icon-footer-phone;
+		}
+		@media (max-width:$tablet){
+			font-size: rem(25);
+		}
+		@media (max-width:$mobileSmall){
+			  &::before{
+				display: block;
+				font-size: rem(32);
+			  }
+			  span{
+				display: none;
+			  }
+			  
+		}
 	}
 	// .phones-header__arrow
 	&__arrow {
@@ -265,6 +335,9 @@
 		transition: transform 0.3s ease 0s;
 		&._spoller-active{
 			transform: rotate(-180deg);
+		}
+		@media (max-width:$tablet){
+			display: none;
 		}
 	}
 	// .phones-header__list
@@ -282,6 +355,9 @@
 		li {
 			&:not(:last-child) {margin-bottom: em(5,18);}
 		}
+		@media (max-width:$tablet){
+			display: none;
+		}
 	}
 	// .phones-header__callback
 	&__callback {
@@ -294,12 +370,17 @@
 				text-decoration: underline;
 			}
 		}
+		@media (max-width:$tablet){
+			display: none;
+		}
 	}
 }
 .cart-header {
 	display: flex;
 	column-gap: rem(15);
 	align-items: center;
+	position: relative;
+	z-index: 5;
 	// .cart-header__icon
 	&__icon {
 		flex: 0 0 rem(37); 
@@ -356,6 +437,9 @@
 	}
 	// .catalog-header__menu
 	&__menu {
+	}
+	@media (max-width:$mobileSmall){
+		 padding: rem(20) 0; 
 	}
 }
 .menu-catalog {
@@ -423,6 +507,13 @@
 		// 	pointer-events: auto;
 		// 	// visibility: visible;
 		// }
+	}
+	@media (max-width:$tablet){
+		position: fixed;
+		top: 0;left: -100%;
+		width: 100%;
+		height: 100%;
+		overflow: auto;
 	}
 }
 .sub-menu-catalog {
@@ -527,8 +618,8 @@
 	@media (max-width: $tablet) {
 		display: block;
 		position: relative;
-		width: 30px;
-		height: 18px;
+		width: 40px;
+		height: 22.5px;
 		cursor: pointer;
 		z-index: 5;
 
